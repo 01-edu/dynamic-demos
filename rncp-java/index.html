@@ -3,554 +3,513 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Parcours RNCP avec 01Talent - Formation Professionnelle</title>
+    <title>RNCP 39583 - Analyse 01Talent</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
         }
         
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
-            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-            color: #1e293b;
-            overflow: hidden;
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f8fafc;
+            color: #1f2937;
+            line-height: 1.6;
+            min-height: 100vh;
         }
         
-        .slideshow-container {
-            position: relative;
-            height: 100vh;
+        .container { 
+            max-width: 1200px; 
+            margin: 0 auto; 
+            padding: 2rem; 
+        }
+        
+        .header { 
+            background: white;
+            padding: 3rem 2rem;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+            margin-bottom: 3rem;
+            text-align: center;
+            border: 1px solid #d1d5db;
+        }
+        
+        .header h1 { 
+            font-size: 2.25rem;
+            font-weight: 700;
+            color: #111827;
+            margin-bottom: 1rem;
+        }
+        
+        .header p { 
+            color: #4b5563; 
+            font-size: 1.125rem; 
+            font-weight: 500;
+        }
+        
+        .coverage-display {
+            margin: 2rem 0;
+            text-align: center;
+        }
+        
+        .coverage-circle {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: conic-gradient(#3b82f6 0deg 360deg, #e5e7eb 360deg);
             display: flex;
             align-items: center;
             justify-content: center;
-        }
-        
-        .slide {
-            display: none;
-            width: 90%;
-            max-width: 1200px;
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(15, 23, 42, 0.08);
-            border: 1px solid #e2e8f0;
-            padding: 60px;
-            animation: slideIn 0.4s ease-in-out;
-        }
-        
-        .slide.active {
-            display: block;
-        }
-        
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .slide h1 {
-            font-size: 2.75rem;
-            font-weight: 700;
-            color: #0f172a;
-            text-align: center;
-            margin-bottom: 2rem;
-            line-height: 1.2;
-        }
-        
-        .slide h2 {
-            font-size: 2.25rem;
-            font-weight: 600;
-            color: #1e293b;
-            margin-bottom: 2rem;
-            text-align: center;
-            border-bottom: 3px solid #3b82f6;
-            padding-bottom: 1rem;
-        }
-        
-        .slide h3 {
-            font-size: 1.75rem;
-            font-weight: 600;
-            color: #334155;
-            margin-bottom: 1.5rem;
-        }
-        
-        .slide p {
-            font-size: 1.2rem;
-            line-height: 1.6;
-            margin-bottom: 1.5rem;
-            color: #475569;
-        }
-        
-        .slide .subtitle {
-            font-size: 1.4rem;
-            color: #64748b;
-            text-align: center;
-            margin-bottom: 3rem;
-            font-weight: 400;
-        }
-        
-        .timeline-visual {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin: 3rem 0;
+            margin: 0 auto 1rem;
             position: relative;
+            border: 3px solid #3b82f6;
         }
         
-        .timeline-visual::before {
+        .coverage-circle::before {
             content: '';
+            width: 70px;
+            height: 70px;
+            background: white;
+            border-radius: 50%;
             position: absolute;
-            top: 50%;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, #1e40af, #3b82f6, #06b6d4, #10b981);
-            border-radius: 2px;
+        }
+        
+        .coverage-text {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #3b82f6;
             z-index: 1;
         }
         
-        .phase-box {
-            background: white;
-            border: 2px solid;
-            border-radius: 8px;
-            padding: 20px;
-            text-align: center;
-            position: relative;
-            z-index: 2;
-            width: 22%;
-            box-shadow: 0 2px 8px rgba(15, 23, 42, 0.1);
-        }
-        
-        .phase-1 { border-color: #1e40af; }
-        .phase-2 { border-color: #3b82f6; }
-        .phase-3 { border-color: #06b6d4; }
-        .phase-4 { border-color: #10b981; }
-        
-        .phase-title {
-            font-weight: 600;
-            font-size: 1.1rem;
-            margin-bottom: 0.5rem;
-            color: #1e293b;
-        }
-        
-        .phase-duration {
-            font-size: 0.9rem;
-            color: #64748b;
-            font-weight: 500;
-        }
-        
-        .certs-grid {
+        .stats-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 2rem;
-            margin: 2rem 0;
+            margin: 3rem 0;
         }
         
-        .cert-card {
-            background: #f8fafc;
-            border: 1px solid #e2e8f0;
-            border-radius: 8px;
+        .stat-card {
+            background: white;
             padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.12);
             text-align: center;
-            box-shadow: 0 1px 3px rgba(15, 23, 42, 0.1);
-            transition: all 0.3s ease;
-        }
-        
-        .cert-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(15, 23, 42, 0.15);
-        }
-        
-        .cert-cyber { border-left: 4px solid #dc2626; }
-        .cert-arch { border-left: 4px solid #0891b2; }
-        .cert-dev { border-left: 4px solid #059669; }
-        
-        .cert-title {
-            font-size: 1.3rem;
-            font-weight: 600;
-            margin-bottom: 0.75rem;
-            color: #1e293b;
-        }
-        
-        .cert-code {
-            font-size: 0.9rem;
-            color: #64748b;
-            font-family: 'JetBrains Mono', 'Fira Code', monospace;
-            background: #e2e8f0;
-            padding: 4px 8px;
-            border-radius: 4px;
-            display: inline-block;
-            margin-bottom: 1rem;
-        }
-        
-        .skills-list {
-            text-align: left;
-            margin: 2rem 0;
-            list-style: none;
-        }
-        
-        .skills-list li {
-            font-size: 1.1rem;
-            margin-bottom: 0.8rem;
-            padding-left: 1.5rem;
-            position: relative;
-            color: #475569;
-        }
-        
-        .skills-list li::before {
-            content: '●';
-            position: absolute;
-            left: 0;
-            color: #3b82f6;
-            font-weight: bold;
-        }
-        
-        .navigation {
-            position: fixed;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 15px;
-            z-index: 1000;
-        }
-        
-        .nav-btn {
-            background: white;
             border: 1px solid #d1d5db;
-            border-radius: 8px;
-            padding: 12px 24px;
-            cursor: pointer;
-            font-weight: 500;
-            color: #374151;
-            transition: all 0.3s ease;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
         
-        .nav-btn:hover {
-            background: #f9fafb;
-            border-color: #3b82f6;
-            color: #3b82f6;
-            transform: translateY(-1px);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        .stat-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
         
-        .slide-counter {
-            position: fixed;
-            top: 30px;
-            right: 30px;
-            background: white;
-            padding: 10px 20px;
-            border-radius: 20px;
-            font-weight: 500;
-            color: #374151;
-            border: 1px solid #e5e7eb;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            display: block;
         }
         
-        .highlight-box {
-            background: #f8fafc;
-            border: 1px solid #e2e8f0;
-            border-left: 4px solid #3b82f6;
-            border-radius: 6px;
-            padding: 1.5rem;
-            margin: 1.5rem 0;
-        }
-        
-        .highlight-title {
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: #1e40af;
-            margin-bottom: 1rem;
-        }
-        
-        .pathway-card {
-            background: #f8fafc;
-            border-radius: 6px;
-            padding: 1.5rem;
-            border-left: 4px solid;
-            margin-bottom: 1rem;
-            box-shadow: 0 1px 3px rgba(15, 23, 42, 0.05);
-        }
-        
-        .pathway-cyber { border-left-color: #dc2626; }
-        .pathway-arch { border-left-color: #0891b2; }
-        .pathway-dev { border-left-color: #059669; }
-        
-        .pathway-title {
-            font-weight: 600;
-            font-size: 1.1rem;
-            margin-bottom: 0.75rem;
-            color: #1e293b;
-        }
-        
-        .pathway-content {
+        .stat-label {
             font-size: 1rem;
-            color: #475569;
-            line-height: 1.5;
-        }
-        
-        .common-path-box {
-            background: #f0f9ff;
-            border: 1px solid #0ea5e9;
-            border-radius: 8px;
-            padding: 1.5rem;
-            margin: 2rem 0;
-            text-align: center;
-        }
-        
-        .common-path-title {
-            font-size: 1.3rem;
             font-weight: 600;
-            color: #0c4a6e;
-            margin-bottom: 1rem;
+            margin-bottom: 0.5rem;
         }
         
-        .logo-placeholder {
-            width: 60px;
-            height: 60px;
-            background: #3b82f6;
+        .stat-desc {
+            font-size: 0.875rem;
+            color: #6b7280;
+        }
+        
+        .projects { color: #2563eb; }
+        .projects .stat-label { color: #2563eb; }
+        
+        .lifeskills { color: #f59e0b; }
+        .lifeskills .stat-label { color: #f59e0b; }
+        
+        .milestone { color: #7c3aed; }
+        .milestone .stat-label { color: #7c3aed; }
+        
+        .total { color: #059669; }
+        .total .stat-label { color: #059669; }
+        
+        .competency-sections {
+            display: grid;
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .section {
+            background: white;
             border-radius: 8px;
-            margin: 0 auto 2rem;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+            border: 1px solid #d1d5db;
+        }
+        
+        .section-header {
+            background: #374151;
+            color: white;
+            padding: 1.5rem 2rem;
+            font-weight: 600;
+            font-size: 1.125rem;
+        }
+        
+        .competency-list {
+            padding: 2rem;
+        }
+        
+        .competency-item {
             display: flex;
             align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: bold;
-            font-size: 1.5rem;
+            padding: 1rem 0;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        
+        .competency-item:last-child {
+            border-bottom: none;
+        }
+        
+        .competency-badge {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 1rem;
+            flex-shrink: 0;
+        }
+        
+        .badge-projects { background: #2563eb; }
+        .badge-lifeskills { background: #f59e0b; }
+        .badge-milestone { background: #7c3aed; }
+        
+        .competency-text {
+            flex: 1;
+        }
+        
+        .competency-title {
+            font-weight: 600;
+            color: #111827;
+            margin-bottom: 0.25rem;
+            font-size: 0.95rem;
+        }
+        
+        .competency-source {
+            font-size: 0.875rem;
+            color: #6b7280;
+            font-weight: 500;
+        }
+        
+        @media (max-width: 768px) {
+            .container { padding: 1rem; }
+            .header { padding: 2rem 1rem; }
+            .header h1 { font-size: 2rem; }
+            .stats-grid { grid-template-columns: 1fr 1fr; gap: 1rem; }
+            .stat-card { padding: 1.5rem 1rem; }
         }
     </style>
 </head>
 <body>
-    <div class="slideshow-container">
-        <div class="slide-counter">
-            <span id="slide-number">1</span> / <span id="total-slides">6</span>
-        </div>
-        
-        <!-- Slide 1: Titre -->
-        <div class="slide active">
-            <div class="logo-placeholder">01</div>
-            <h1>Parcours de Certification RNCP Niveau 7</h1>
-            <p class="subtitle">Formation Professionnelle avec le Curriculum 01Talent</p>
-            <div style="text-align: center; margin-top: 3rem;">
-                <p style="font-size: 1.4rem; color: #1e40af; font-weight: 600;">18 Mois de Formation Technique Intensive</p>
-                <p style="font-size: 1.1rem; margin-top: 1rem; color: #64748b;">Un Parcours Unique pour 3 Certifications RNCP</p>
-            </div>
-            <div class="common-path-box">
-                <div class="common-path-title">Formation Commune - Toutes Spécialisations</div>
-                <p style="color: #475569;">Même curriculum complet pour tous les apprenants, quelle que soit leur certification cible</p>
+    <div class="container">
+        <div class="header">
+            <h1>RNCP 39583</h1>
+            <p>Expert en Développement Logiciel</p>
+            <p style="font-size: 1rem; margin-top: 0.5rem; color: #4b5563;">Programme 01Talent - Analyse de Couverture</p>
+            
+            <div class="coverage-display">
+                <div class="coverage-circle">
+                    <span class="coverage-text">100%</span>
+                </div>
+                <p style="font-weight: 700; color: #3b82f6; font-size: 1.2rem;">Couverture Intégrale Validée</p>
             </div>
         </div>
         
-        <!-- Slide 2: Les 3 Certifications Cibles -->
-        <div class="slide">
-            <h2>3 Certifications Accessibles avec un Seul Parcours</h2>
-            <div class="certs-grid">
-                <div class="cert-card cert-cyber">
-                    <h3 class="cert-title">Expert en Cybersécurité</h3>
-                    <p class="cert-code">RNCP 40897</p>
-                    <p>Stratégie sécurité, implémentation technique, surveillance, gestion de crise cybersécurité</p>
-                </div>
-                <div class="cert-card cert-arch">
-                    <h3 class="cert-title">Expert en Architecture SI</h3>
-                    <p class="cert-code">RNCP 39582</p>
-                    <p>Planification stratégique, gestion de projets, DevOps, maintenance opérationnelle</p>
-                </div>
-                <div class="cert-card cert-dev">
-                    <h3 class="cert-title">Expert en Développement Logiciel</h3>
-                    <p class="cert-code">RNCP 39583</p>
-                    <p>Conception d'applications, coordination d'équipes, architecture logicielle</p>
-                </div>
+        <div class="stats-grid">
+            <div class="stat-card projects">
+                <span class="stat-number">10</span>
+                <div class="stat-label">Projets Techniques</div>
+                <div class="stat-desc">Tous les projets de développement</div>
             </div>
-            <div class="common-path-box">
-                <div class="common-path-title">Formation Transversale</div>
-                <p style="color: #475569;">Le curriculum 01Talent couvre naturellement les compétences requises pour les 3 certifications</p>
+            <div class="stat-card lifeskills">
+                <span class="stat-number">4</span>
+                <div class="stat-label">Lifeskills + Internship</div>
+                <div class="stat-desc">Compétences professionnelles</div>
+            </div>
+            <div class="stat-card milestone">
+                <span class="stat-number">1</span>
+                <div class="stat-label">Milestone Project</div>
+                <div class="stat-desc">Capstone projects building towards milestone</div>
+            </div>
+            <div class="stat-card total">
+                <span class="stat-number">34</span>
+                <div class="stat-label">Compétences RNCP</div>
+                <div class="stat-desc">100% du référentiel officiel</div>
             </div>
         </div>
         
-        <!-- Slide 3: Vue d'ensemble du Parcours -->
-        <div class="slide">
-            <h2>Architecture du Parcours Unifié - 18 Mois</h2>
-            <div class="timeline-visual">
-                <div class="phase-box phase-1">
-                    <div class="phase-title">Fondamentaux Go</div>
-                    <div class="phase-duration">Mois 1-5</div>
-                </div>
-                <div class="phase-box phase-2">
-                    <div class="phase-title">JavaScript Full-Stack</div>
-                    <div class="phase-duration">Mois 7-11, 14</div>
-                </div>
-                <div class="phase-box phase-3">
-                    <div class="phase-title">Rust Systèmes</div>
-                    <div class="phase-duration">Mois 13-16</div>
-                </div>
-                <div class="phase-box phase-4">
-                    <div class="phase-title">AdminSys</div>
-                    <div class="phase-duration">Mois 17-18</div>
-                </div>
-            </div>
-            <div style="margin-top: 3rem;">
-                <h3>Progression Technique Complète</h3>
-                <p>Tous les apprenants suivent l'intégralité du curriculum, développant une expertise transversale</p>
-                <p>Les compétences acquises couvrent naturellement les blocs RNCP des 3 certifications</p>
-            </div>
-        </div>
-        
-        <!-- Slide 4: Phase Go - Fondamentaux -->
-        <div class="slide">
-            <h2>Phase 1 : Fondamentaux Go (Mois 1-5)</h2>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem;">
-                <div>
-                    <h3>Projets Clés - Tous Obligatoires</h3>
-                    <ul class="skills-list">
-                        <li>go-reloaded : Traitement de texte avancé</li>
-                        <li>ascii-art : Applications en ligne de commande</li>
-                        <li>groupie-tracker : API RESTful et manipulation de données</li>
-                        <li>forum : Base de données, authentification utilisateur</li>
-                        <li>lem-in : Algorithmes avancés et optimisation</li>
-                    </ul>
-                </div>
-                <div>
-                    <h3>Compétences RNCP Développées</h3>
-                    <div class="pathway-card pathway-dev">
-                        <div class="pathway-title">Développement (BC01, BC02)</div>
-                        <div class="pathway-content">Modélisation architecture, développement sécurisé, intégration continue</div>
+        <div class="competency-sections">
+            <div class="section">
+                <div class="section-header">BC01 - Cadrer un projet de développement d'applications (11 compétences)</div>
+                <div class="competency-list">
+                    <div class="competency-item">
+                        <div class="competency-badge badge-milestone"></div>
+                        <div class="competency-text">
+                            <div class="competency-title">Cartographier les acteurs du projet et leurs rôles</div>
+                            <div class="competency-source">Milestone Project - Cartographie stratégique</div>
+                        </div>
                     </div>
-                    <div class="pathway-card pathway-arch">
-                        <div class="pathway-title">Architecture (BC01)</div>
-                        <div class="pathway-content">Stratégie technique, conception système robuste</div>
+                    <div class="competency-item">
+                        <div class="competency-badge badge-projects"></div>
+                        <div class="competency-text">
+                            <div class="competency-title">Analyser la demande par entretiens d'explicitation</div>
+                            <div class="competency-source">Projets: buy-01, travel-plan, lets-travel</div>
+                        </div>
                     </div>
-                    <div class="pathway-card pathway-cyber">
-                        <div class="pathway-title">Cybersécurité (BC01)</div>
-                        <div class="pathway-content">Sécurisation applications, implémentation bonnes pratiques</div>
+                    <div class="competency-item">
+                        <div class="competency-badge badge-milestone"></div>
+                        <div class="competency-text">
+                            <div class="competency-title">Cartographier opportunités et menaces du projet</div>
+                            <div class="competency-source">Milestone Project - Analyse SWOT</div>
+                        </div>
                     </div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Slide 5: Phase JavaScript -->
-        <div class="slide">
-            <h2>Phase 2 : JavaScript Full-Stack (Mois 7-11, 14)</h2>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem;">
-                <div>
-                    <h3>Projets Avancés - Tous Obligatoires</h3>
-                    <ul class="skills-list">
-                        <li>make-your-game : Optimisation performance 60fps</li>
-                        <li>real-time-forum : Communications WebSockets temps réel</li>
-                        <li>social-network : Architecture complexe multi-utilisateurs</li>
-                        <li>mini-framework : Développement framework personnalisé</li>
-                        <li>bomberman-dom : Jeu multijoueur en temps réel</li>
-                    </ul>
-                </div>
-                <div>
-                    <h3>Couverture Multi-Certifications</h3>
-                    <div class="pathway-card pathway-dev">
-                        <div class="pathway-title">Développement (BC02, BC03)</div>
-                        <div class="pathway-content">Prototypage rapide, coordination équipe technique</div>
+                    <div class="competency-item">
+                        <div class="competency-badge badge-milestone"></div>
+                        <div class="competency-text">
+                            <div class="competency-title">Évaluer la faisabilité technique</div>
+                            <div class="competency-source">Milestone Project - Évaluation technique</div>
+                        </div>
                     </div>
-                    <div class="pathway-card pathway-arch">
-                        <div class="pathway-title">Architecture (BC02, BC03)</div>
-                        <div class="pathway-content">Gestion projets complexes, maintenance évolutive</div>
+                    <div class="competency-item">
+                        <div class="competency-badge badge-projects"></div>
+                        <div class="competency-text">
+                            <div class="competency-title">Cartographier les risques techniques et fonctionnels</div>
+                            <div class="competency-source">Projets: safe-zone, buy-02, travel-plan, lets-travel</div>
+                        </div>
                     </div>
-                    <div class="pathway-card pathway-cyber">
-                        <div class="pathway-title">Cybersécurité (BC02)</div>
-                        <div class="pathway-content">Sécurisation infrastructure réseau, surveillance</div>
+                    <div class="competency-item">
+                        <div class="competency-badge badge-milestone"></div>
+                        <div class="competency-text">
+                            <div class="competency-title">Réaliser veille technique et réglementaire</div>
+                            <div class="competency-source">Milestone Project - Veille stratégique</div>
+                        </div>
+                    </div>
+                    <div class="competency-item">
+                        <div class="competency-badge badge-projects"></div>
+                        <div class="competency-text">
+                            <div class="competency-title">Sélectionner l'architecture technique adaptée</div>
+                            <div class="competency-source">Projets: buy-01, travel-plan, lets-travel</div>
+                        </div>
+                    </div>
+                    <div class="competency-item">
+                        <div class="competency-badge badge-projects"></div>
+                        <div class="competency-text">
+                            <div class="competency-title">Évaluer la charge de travail nécessaire</div>
+                            <div class="competency-source">Projets: buy-01, buy-02, travel-plan, lets-travel</div>
+                        </div>
+                    </div>
+                    <div class="competency-item">
+                        <div class="competency-badge badge-milestone"></div>
+                        <div class="competency-text">
+                            <div class="competency-title">Estimer le coût associé au projet</div>
+                            <div class="competency-source">Milestone Project - Budgétisation</div>
+                        </div>
+                    </div>
+                    <div class="competency-item">
+                        <div class="competency-badge badge-projects"></div>
+                        <div class="competency-text">
+                            <div class="competency-title">Modéliser architecture logicielle</div>
+                            <div class="competency-source">Projets: buy-01, buy-02, travel-plan, lets-travel</div>
+                        </div>
+                    </div>
+                    <div class="competency-item">
+                        <div class="competency-badge badge-milestone"></div>
+                        <div class="competency-text">
+                            <div class="competency-title">Proposer décisions et solutions au client</div>
+                            <div class="competency-source">Milestone Project - Négociation commerciale</div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        
-        <!-- Slide 6: Phase Rust + AdminSys -->
-        <div class="slide">
-            <h2>Phases 3-4 : Rust + AdminSys (Mois 13-18)</h2>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem;">
-                <div>
-                    <h3>Rust - Systèmes Avancés</h3>
-                    <ul class="skills-list">
-                        <li>smart-road : Algorithmes d'intelligence artificielle</li>
-                        <li>rt : Ray tracing et calculs mathématiques</li>
-                        <li>multiplayer-fps : Réseaux UDP haute performance</li>
-                        <li>localhost : Serveur HTTP développé from scratch</li>
-                        <li>0-shell : Implémentation shell Unix complet</li>
-                    </ul>
-                    <h3>AdminSys - Infrastructure</h3>
-                    <ul class="skills-list">
-                        <li>Administration Linux, SSH, virtualisation</li>
-                        <li>Cartographie réseau avec nmap</li>
-                        <li>Configuration firewall et monitoring</li>
-                    </ul>
-                </div>
-                <div>
-                    <h3>Expertise Transversale Maximale</h3>
-                    <div class="pathway-card pathway-cyber">
-                        <div class="pathway-title">Cybersécurité (BC02, BC03)</div>
-                        <div class="pathway-content">Cartographie SI, surveillance continue, gestion incidents sécurité</div>
+            
+            <div class="section">
+                <div class="section-header">BC02 - Concevoir et développer des applications (9 compétences)</div>
+                <div class="competency-list">
+                    <div class="competency-item">
+                        <div class="competency-badge badge-projects"></div>
+                        <div class="competency-text">
+                            <div class="competency-title">Mettre en œuvre environnements déploiement et test</div>
+                            <div class="competency-source">Projets: mr-jenk, buy-02, travel-plan, lets-travel</div>
+                        </div>
                     </div>
-                    <div class="pathway-card pathway-arch">
-                        <div class="pathway-title">Architecture (BC02, BC04)</div>
-                        <div class="pathway-content">Infrastructure as Code, automatisation DevOps, maintenance</div>
+                    <div class="competency-item">
+                        <div class="competency-badge badge-projects"></div>
+                        <div class="competency-text">
+                            <div class="competency-title">Configurer système intégration continue</div>
+                            <div class="competency-source">Projets: mr-jenk, safe-zone</div>
+                        </div>
                     </div>
-                    <div class="pathway-card pathway-dev">
-                        <div class="pathway-title">Développement (BC03)</div>
-                        <div class="pathway-content">Supervision système, optimisation performance applicative</div>
+                    <div class="competency-item">
+                        <div class="competency-badge badge-projects"></div>
+                        <div class="competency-text">
+                            <div class="competency-title">Concevoir prototype application logicielle</div>
+                            <div class="competency-source">Projets: lets-play, angul-it</div>
+                        </div>
+                    </div>
+                    <div class="competency-item">
+                        <div class="competency-badge badge-projects"></div>
+                        <div class="competency-text">
+                            <div class="competency-title">Développer harnais de test unitaire</div>
+                            <div class="competency-source">Projets: mr-jenk, buy-02, travel-plan, lets-travel</div>
+                        </div>
+                    </div>
+                    <div class="competency-item">
+                        <div class="competency-badge badge-projects"></div>
+                        <div class="competency-text">
+                            <div class="competency-title">Développer le logiciel</div>
+                            <div class="competency-source">Projets: lets-play, buy-01, buy-02, travel-plan, lets-travel</div>
+                        </div>
+                    </div>
+                    <div class="competency-item">
+                        <div class="competency-badge badge-projects"></div>
+                        <div class="competency-text">
+                            <div class="competency-title">Déployer logiciel progressivement</div>
+                            <div class="competency-source">Projets: mr-jenk, buy-02, travel-plan, lets-travel</div>
+                        </div>
+                    </div>
+                    <div class="competency-item">
+                        <div class="competency-badge badge-projects"></div>
+                        <div class="competency-text">
+                            <div class="competency-title">Élaborer cahier de recettes</div>
+                            <div class="competency-source">Projets: buy-02, travel-plan, lets-travel</div>
+                        </div>
+                    </div>
+                    <div class="competency-item">
+                        <div class="competency-badge badge-projects"></div>
+                        <div class="competency-text">
+                            <div class="competency-title">Élaborer plan correction bogues</div>
+                            <div class="competency-source">Projets: buy-02, travel-plan, lets-travel, lets-play</div>
+                        </div>
+                    </div>
+                    <div class="competency-item">
+                        <div class="competency-badge badge-projects"></div>
+                        <div class="competency-text">
+                            <div class="competency-title">Rédiger documentation technique</div>
+                            <div class="competency-source">Projets: Tous les projets techniques</div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        
-        <div class="navigation">
-            <button class="nav-btn" onclick="changeSlide(-1)">← Précédent</button>
-            <button class="nav-btn" onclick="changeSlide(1)">Suivant →</button>
+            
+            <div class="section">
+                <div class="section-header">BC03 - Coordonner et piloter un projet (7 compétences)</div>
+                <div class="competency-list">
+                    <div class="competency-item">
+                        <div class="competency-badge badge-projects"></div>
+                        <div class="competency-text">
+                            <div class="competency-title">Planifier l'exécution du projet</div>
+                            <div class="competency-source">Projets: travel-plan, lets-travel</div>
+                        </div>
+                    </div>
+                    <div class="competency-item">
+                        <div class="competency-badge badge-projects"></div>
+                        <div class="competency-text">
+                            <div class="competency-title">Piloter l'avancement du projet</div>
+                            <div class="competency-source">Projets: travel-plan, lets-travel</div>
+                        </div>
+                    </div>
+                    <div class="competency-item">
+                        <div class="competency-badge badge-milestone"></div>
+                        <div class="competency-text">
+                            <div class="competency-title">Procéder aux arbitrages nécessaires</div>
+                            <div class="competency-source">Milestone Project - Décisions stratégiques</div>
+                        </div>
+                    </div>
+                    <div class="competency-item">
+                        <div class="competency-badge badge-milestone"></div>
+                        <div class="competency-text">
+                            <div class="competency-title">Piloter l'équipe tout au long du projet</div>
+                            <div class="competency-source">Milestone Project - Management d'équipe</div>
+                        </div>
+                    </div>
+                    <div class="competency-item">
+                        <div class="competency-badge badge-milestone"></div>
+                        <div class="competency-text">
+                            <div class="competency-title">Évaluer besoins en compétences équipe</div>
+                            <div class="competency-source">Milestone Project - Gestion RH</div>
+                        </div>
+                    </div>
+                    <div class="competency-item">
+                        <div class="competency-badge badge-lifeskills"></div>
+                        <div class="competency-text">
+                            <div class="competency-title">Effectuer comptes rendus client</div>
+                            <div class="competency-source">Lifeskills + Internship - Communication</div>
+                        </div>
+                    </div>
+                    <div class="competency-item">
+                        <div class="competency-badge badge-lifeskills"></div>
+                        <div class="competency-text">
+                            <div class="competency-title">Réaliser démonstration fonctionnalités</div>
+                            <div class="competency-source">Lifeskills + Internship - Présentations</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <div class="section-header">BC04 - Maintenir l'application en condition opérationnelle (7 compétences)</div>
+                <div class="competency-list">
+                    <div class="competency-item">
+                        <div class="competency-badge badge-milestone"></div>
+                        <div class="competency-text">
+                            <div class="competency-title">Gérer mises à jour dépendances/bibliothèques</div>
+                            <div class="competency-source">Milestone Project - Gestion packages</div>
+                        </div>
+                    </div>
+                    <div class="competency-item">
+                        <div class="competency-badge badge-projects"></div>
+                        <div class="competency-text">
+                            <div class="competency-title">Concevoir système supervision et alerte</div>
+                            <div class="competency-source">Projets: buy-02, travel-plan, lets-travel</div>
+                        </div>
+                    </div>
+                    <div class="competency-item">
+                        <div class="competency-badge badge-projects"></div>
+                        <div class="competency-text">
+                            <div class="competency-title">Consigner anomalies détectées</div>
+                            <div class="competency-source">Projets: safe-zone, buy-02, travel-plan, lets-travel</div>
+                        </div>
+                    </div>
+                    <div class="competency-item">
+                        <div class="competency-badge badge-projects"></div>
+                        <div class="competency-text">
+                            <div class="competency-title">Créer et déployer correctif</div>
+                            <div class="competency-source">Projets: mr-jenk, safe-zone, buy-02, travel-plan, lets-travel</div>
+                        </div>
+                    </div>
+                    <div class="competency-item">
+                        <div class="competency-badge badge-lifeskills"></div>
+                        <div class="competency-text">
+                            <div class="competency-title">Proposer axes d'amélioration</div>
+                            <div class="competency-source">Lifeskills + Internship - Amélioration continue</div>
+                        </div>
+                    </div>
+                    <div class="competency-item">
+                        <div class="competency-badge badge-milestone"></div>
+                        <div class="competency-text">
+                            <div class="competency-title">Établir journal versions déployées</div>
+                            <div class="competency-source">Milestone Project - Documentation versions</div>
+                        </div>
+                    </div>
+                    <div class="competency-item">
+                        <div class="competency-badge badge-lifeskills"></div>
+                        <div class="competency-text">
+                            <div class="competency-title">Collaborer avec équipes support</div>
+                            <div class="competency-source">Lifeskills + Internship - Collaboration</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    
-    <script>
-        let currentSlide = 0;
-        const slides = document.querySelectorAll('.slide');
-        const totalSlides = slides.length;
-        
-        document.getElementById('total-slides').textContent = totalSlides;
-        
-        function showSlide(n) {
-            slides[currentSlide].classList.remove('active');
-            currentSlide = (n + totalSlides) % totalSlides;
-            slides[currentSlide].classList.add('active');
-            document.getElementById('slide-number').textContent = currentSlide + 1;
-        }
-        
-        function changeSlide(direction) {
-            showSlide(currentSlide + direction);
-        }
-        
-        // Keyboard navigation
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'ArrowRight' || e.key === ' ') {
-                changeSlide(1);
-            } else if (e.key === 'ArrowLeft') {
-                changeSlide(-1);
-            }
-        });
-        
-        // Touch gestures for mobile
-        let touchStartX = 0;
-        let touchEndX = 0;
-        
-        document.addEventListener('touchstart', function(e) {
-            touchStartX = e.changedTouches[0].screenX;
-        });
-        
-        document.addEventListener('touchend', function(e) {
-            touchEndX = e.changedTouches[0].screenX;
-            handleSwipe();
-        });
-        
-        function handleSwipe() {
-            if (touchEndX < touchStartX - 50) {
-                changeSlide(1);
-            }
-            if (touchEndX > touchStartX + 50) {
-                changeSlide(-1);
-            }
-        }
-    </script>
 </body>
 </html>
