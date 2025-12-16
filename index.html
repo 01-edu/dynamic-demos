@@ -213,7 +213,7 @@
 
       .competency-item {
         display: flex;
-        align-items: center;
+        align-items: flex-start;
         padding: 1rem 0;
         border-bottom: 1px solid #e5e7eb;
       }
@@ -227,6 +227,7 @@
         height: 12px;
         border-radius: 50%;
         margin-right: 1rem;
+        margin-top: 0.3rem;
         flex-shrink: 0;
       }
 
@@ -247,7 +248,7 @@
       .competency-title {
         font-weight: 600;
         color: #111827;
-        margin-bottom: 0.25rem;
+        margin-bottom: 0.5rem;
         font-size: 0.95rem;
       }
 
@@ -255,6 +256,108 @@
         font-size: 0.875rem;
         color: #6b7280;
         font-weight: 500;
+        margin-bottom: 0.5rem;
+      }
+
+      .project-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-top: 0.5rem;
+      }
+
+      .project-tag {
+        display: inline-flex;
+        align-items: center;
+        padding: 0.375rem 0.75rem;
+        background: #eff6ff;
+        color: #1e40af;
+        border: 1px solid #bfdbfe;
+        border-radius: 4px;
+        font-size: 0.8125rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+
+      .project-tag:hover {
+        background: #dbeafe;
+        border-color: #93c5fd;
+        transform: translateY(-1px);
+      }
+
+      .project-tag.lifeskills-tag {
+        background: #fffbeb;
+        color: #92400e;
+        border-color: #fde68a;
+      }
+
+      .project-tag.lifeskills-tag:hover {
+        background: #fef3c7;
+        border-color: #fcd34d;
+      }
+
+      .project-tag.milestone-tag {
+        background: #faf5ff;
+        color: #5b21b6;
+        border-color: #e9d5ff;
+      }
+
+      .project-tag.milestone-tag:hover {
+        background: #f3e8ff;
+        border-color: #d8b4fe;
+      }
+
+      .project-tag-icon {
+        margin-left: 0.25rem;
+        font-size: 0.75rem;
+        opacity: 0.7;
+      }
+
+      .project-description {
+        margin-top: 0.75rem;
+        padding: 1rem;
+        background: #f9fafb;
+        border-left: 3px solid #3b82f6;
+        border-radius: 4px;
+        display: none;
+        animation: slideDown 0.3s ease;
+      }
+
+      .project-description.active {
+        display: block;
+      }
+
+      .project-description.lifeskills-desc {
+        border-left-color: #f59e0b;
+      }
+
+      .project-description.milestone-desc {
+        border-left-color: #7c3aed;
+      }
+
+      .project-description-title {
+        font-weight: 600;
+        color: #1f2937;
+        font-size: 0.875rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .project-description-text {
+        font-size: 0.8125rem;
+        color: #4b5563;
+        line-height: 1.5;
+      }
+
+      @keyframes slideDown {
+        from {
+          opacity: 0;
+          transform: translateY(-10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
       }
 
       @media (max-width: 768px) {
@@ -281,6 +384,13 @@
         }
         .stat-card {
           padding: 1.5rem 1rem;
+        }
+        .project-tags {
+          gap: 0.375rem;
+        }
+        .project-tag {
+          padding: 0.25rem 0.5rem;
+          font-size: 0.75rem;
         }
       }
     </style>
@@ -361,8 +471,21 @@
                 <div class="competency-source">
                   Milestone Project - Cartographie stratégique
                 </div>
+                <div class="project-tags">
+                  <span class="project-tag milestone-tag" onclick="toggleDescription(this, 'milestone')">
+                    Milestone Project
+                    <span class="project-tag-icon">▼</span>
+                  </span>
+                </div>
+                <div class="project-description milestone-desc">
+                  <div class="project-description-title">Milestone Project</div>
+                  <div class="project-description-text">
+                    Projet capstone intégrant l'ensemble des compétences acquises en cartographie stratégique, analyse SWOT, évaluation technique, et gestion de projet. Ce projet consolide les apprentissages des projets travel-plan et lets-travel.
+                  </div>
+                </div>
               </div>
             </div>
+
             <div class="competency-item">
               <div class="competency-badge badge-projects"></div>
               <div class="competency-text">
@@ -372,8 +495,41 @@
                 <div class="competency-source">
                   Projets: buy-01, travel-plan, lets-travel
                 </div>
+                <div class="project-tags">
+                  <span class="project-tag" onclick="toggleDescription(this, 'buy-01')">
+                    buy-01
+                    <span class="project-tag-icon">▼</span>
+                  </span>
+                  <span class="project-tag" onclick="toggleDescription(this, 'travel-plan')">
+                    travel-plan
+                    <span class="project-tag-icon">▼</span>
+                  </span>
+                  <span class="project-tag" onclick="toggleDescription(this, 'lets-travel')">
+                    lets-travel
+                    <span class="project-tag-icon">▼</span>
+                  </span>
+                </div>
+                <div class="project-description" data-project="buy-01">
+                  <div class="project-description-title">buy-01</div>
+                  <div class="project-description-text">
+                    Création d'une plateforme e-commerce multi-services complète utilisant Spring Boot, Angular et MongoDB. Ce projet fusionne les compétences back-end et front-end pour créer une application full-stack fonctionnelle. Les apprenants développent des API et des interfaces web intégrées.
+                  </div>
+                </div>
+                <div class="project-description" data-project="travel-plan">
+                  <div class="project-description-title">travel-plan</div>
+                  <div class="project-description-text">
+                    Développement d'un panneau d'administration pour une plateforme de réservation de voyages. Ce back-office permet la configuration des voyages proposés aux utilisateurs. Utilise Spring Boot, Angular, microservices, PostgreSQL, Neo4j, avec intégration CI/CD complète via Jenkins et SonarQube.
+                  </div>
+                </div>
+                <div class="project-description" data-project="lets-travel">
+                  <div class="project-description-title">lets-travel</div>
+                  <div class="project-description-text">
+                    Interface client pour la plateforme Travel-Plan permettant aux utilisateurs de personnaliser et réserver des voyages selon leurs préférences. Intègre Spring Boot, MongoDB, microservices, Elasticsearch, Docker et Neo4j pour une expérience utilisateur complète.
+                  </div>
+                </div>
               </div>
             </div>
+
             <div class="competency-item">
               <div class="competency-badge badge-milestone"></div>
               <div class="competency-text">
@@ -383,8 +539,21 @@
                 <div class="competency-source">
                   Milestone Project - Analyse SWOT
                 </div>
+                <div class="project-tags">
+                  <span class="project-tag milestone-tag" onclick="toggleDescription(this, 'milestone')">
+                    Milestone Project
+                    <span class="project-tag-icon">▼</span>
+                  </span>
+                </div>
+                <div class="project-description milestone-desc">
+                  <div class="project-description-title">Milestone Project</div>
+                  <div class="project-description-text">
+                    Projet capstone intégrant l'ensemble des compétences acquises en cartographie stratégique, analyse SWOT, évaluation technique, et gestion de projet.
+                  </div>
+                </div>
               </div>
             </div>
+
             <div class="competency-item">
               <div class="competency-badge badge-milestone"></div>
               <div class="competency-text">
@@ -394,8 +563,21 @@
                 <div class="competency-source">
                   Milestone Project - Évaluation technique
                 </div>
+                <div class="project-tags">
+                  <span class="project-tag milestone-tag" onclick="toggleDescription(this, 'milestone')">
+                    Milestone Project
+                    <span class="project-tag-icon">▼</span>
+                  </span>
+                </div>
+                <div class="project-description milestone-desc">
+                  <div class="project-description-title">Milestone Project</div>
+                  <div class="project-description-text">
+                    Projet capstone intégrant l'ensemble des compétences acquises en cartographie stratégique, analyse SWOT, évaluation technique, et gestion de projet.
+                  </div>
+                </div>
               </div>
             </div>
+
             <div class="competency-item">
               <div class="competency-badge badge-projects"></div>
               <div class="competency-text">
@@ -405,8 +587,51 @@
                 <div class="competency-source">
                   Projets: safe-zone, buy-02, travel-plan, lets-travel
                 </div>
+                <div class="project-tags">
+                  <span class="project-tag" onclick="toggleDescription(this, 'safe-zone')">
+                    safe-zone
+                    <span class="project-tag-icon">▼</span>
+                  </span>
+                  <span class="project-tag" onclick="toggleDescription(this, 'buy-02')">
+                    buy-02
+                    <span class="project-tag-icon">▼</span>
+                  </span>
+                  <span class="project-tag" onclick="toggleDescription(this, 'travel-plan')">
+                    travel-plan
+                    <span class="project-tag-icon">▼</span>
+                  </span>
+                  <span class="project-tag" onclick="toggleDescription(this, 'lets-travel')">
+                    lets-travel
+                    <span class="project-tag-icon">▼</span>
+                  </span>
+                </div>
+                <div class="project-description" data-project="safe-zone">
+                  <div class="project-description-title">safe-zone</div>
+                  <div class="project-description-text">
+                    Intégration de SonarQube dans le pipeline CI/CD pour garantir la qualité du code et éviter les failles de sécurité. Les apprenants apprennent les meilleures pratiques de codage et l'analyse statique du code dans le cadre du projet buy-01.
+                  </div>
+                </div>
+                <div class="project-description" data-project="buy-02">
+                  <div class="project-description-title">buy-02</div>
+                  <div class="project-description-text">
+                    Finalisation du projet buy-01 dans un environnement de développement professionnel complet avec CI/CD. Les apprenants expérimentent les avantages d'un environnement robuste incluant Jenkins, SonarQube, Docker pour compléter l'application e-commerce.
+                  </div>
+                </div>
+                <div class="project-description" data-project="travel-plan">
+                  <div class="project-description-title">travel-plan</div>
+                  <div class="project-description-text">
+                    Développement d'un panneau d'administration pour une plateforme de réservation de voyages avec Spring Boot, Angular, microservices, PostgreSQL et Neo4j.
+                  </div>
+                </div>
+                <div class="project-description" data-project="lets-travel">
+                  <div class="project-description-title">lets-travel</div>
+                  <div class="project-description-text">
+                    Interface client pour la plateforme Travel-Plan avec Spring Boot, MongoDB, microservices, Elasticsearch, Docker et Neo4j.
+                  </div>
+                </div>
               </div>
             </div>
+
             <div class="competency-item">
               <div class="competency-badge badge-milestone"></div>
               <div class="competency-text">
@@ -416,8 +641,21 @@
                 <div class="competency-source">
                   Milestone Project - Veille stratégique
                 </div>
+                <div class="project-tags">
+                  <span class="project-tag milestone-tag" onclick="toggleDescription(this, 'milestone')">
+                    Milestone Project
+                    <span class="project-tag-icon">▼</span>
+                  </span>
+                </div>
+                <div class="project-description milestone-desc">
+                  <div class="project-description-title">Milestone Project</div>
+                  <div class="project-description-text">
+                    Projet capstone intégrant l'ensemble des compétences acquises en cartographie stratégique, analyse SWOT, évaluation technique, et gestion de projet.
+                  </div>
+                </div>
               </div>
             </div>
+
             <div class="competency-item">
               <div class="competency-badge badge-projects"></div>
               <div class="competency-text">
@@ -427,8 +665,41 @@
                 <div class="competency-source">
                   Projets: buy-01, travel-plan, lets-travel
                 </div>
+                <div class="project-tags">
+                  <span class="project-tag" onclick="toggleDescription(this, 'buy-01')">
+                    buy-01
+                    <span class="project-tag-icon">▼</span>
+                  </span>
+                  <span class="project-tag" onclick="toggleDescription(this, 'travel-plan')">
+                    travel-plan
+                    <span class="project-tag-icon">▼</span>
+                  </span>
+                  <span class="project-tag" onclick="toggleDescription(this, 'lets-travel')">
+                    lets-travel
+                    <span class="project-tag-icon">▼</span>
+                  </span>
+                </div>
+                <div class="project-description" data-project="buy-01">
+                  <div class="project-description-title">buy-01</div>
+                  <div class="project-description-text">
+                    Création d'une plateforme e-commerce multi-services complète utilisant Spring Boot, Angular et MongoDB pour fusionner les compétences back-end et front-end.
+                  </div>
+                </div>
+                <div class="project-description" data-project="travel-plan">
+                  <div class="project-description-title">travel-plan</div>
+                  <div class="project-description-text">
+                    Développement d'un panneau d'administration pour une plateforme de réservation de voyages avec Spring Boot, Angular, microservices, PostgreSQL et Neo4j.
+                  </div>
+                </div>
+                <div class="project-description" data-project="lets-travel">
+                  <div class="project-description-title">lets-travel</div>
+                  <div class="project-description-text">
+                    Interface client pour la plateforme Travel-Plan avec Spring Boot, MongoDB, microservices, Elasticsearch, Docker et Neo4j.
+                  </div>
+                </div>
               </div>
             </div>
+
             <div class="competency-item">
               <div class="competency-badge badge-projects"></div>
               <div class="competency-text">
@@ -438,8 +709,51 @@
                 <div class="competency-source">
                   Projets: buy-01, buy-02, travel-plan, lets-travel
                 </div>
+                <div class="project-tags">
+                  <span class="project-tag" onclick="toggleDescription(this, 'buy-01')">
+                    buy-01
+                    <span class="project-tag-icon">▼</span>
+                  </span>
+                  <span class="project-tag" onclick="toggleDescription(this, 'buy-02')">
+                    buy-02
+                    <span class="project-tag-icon">▼</span>
+                  </span>
+                  <span class="project-tag" onclick="toggleDescription(this, 'travel-plan')">
+                    travel-plan
+                    <span class="project-tag-icon">▼</span>
+                  </span>
+                  <span class="project-tag" onclick="toggleDescription(this, 'lets-travel')">
+                    lets-travel
+                    <span class="project-tag-icon">▼</span>
+                  </span>
+                </div>
+                <div class="project-description" data-project="buy-01">
+                  <div class="project-description-title">buy-01</div>
+                  <div class="project-description-text">
+                    Création d'une plateforme e-commerce multi-services complète utilisant Spring Boot, Angular et MongoDB.
+                  </div>
+                </div>
+                <div class="project-description" data-project="buy-02">
+                  <div class="project-description-title">buy-02</div>
+                  <div class="project-description-text">
+                    Finalisation du projet buy-01 dans un environnement de développement professionnel avec CI/CD, Jenkins, SonarQube et Docker.
+                  </div>
+                </div>
+                <div class="project-description" data-project="travel-plan">
+                  <div class="project-description-title">travel-plan</div>
+                  <div class="project-description-text">
+                    Panneau d'administration pour plateforme de réservation de voyages avec technologies complètes.
+                  </div>
+                </div>
+                <div class="project-description" data-project="lets-travel">
+                  <div class="project-description-title">lets-travel</div>
+                  <div class="project-description-text">
+                    Interface client pour personnalisation et réservation de voyages.
+                  </div>
+                </div>
               </div>
             </div>
+
             <div class="competency-item">
               <div class="competency-badge badge-milestone"></div>
               <div class="competency-text">
@@ -449,8 +763,21 @@
                 <div class="competency-source">
                   Milestone Project - Budgétisation
                 </div>
+                <div class="project-tags">
+                  <span class="project-tag milestone-tag" onclick="toggleDescription(this, 'milestone')">
+                    Milestone Project
+                    <span class="project-tag-icon">▼</span>
+                  </span>
+                </div>
+                <div class="project-description milestone-desc">
+                  <div class="project-description-title">Milestone Project</div>
+                  <div class="project-description-text">
+                    Projet capstone intégrant l'ensemble des compétences acquises incluant la budgétisation et l'estimation des coûts projet.
+                  </div>
+                </div>
               </div>
             </div>
+
             <div class="competency-item">
               <div class="competency-badge badge-projects"></div>
               <div class="competency-text">
@@ -460,8 +787,51 @@
                 <div class="competency-source">
                   Projets: buy-01, buy-02, travel-plan, lets-travel
                 </div>
+                <div class="project-tags">
+                  <span class="project-tag" onclick="toggleDescription(this, 'buy-01')">
+                    buy-01
+                    <span class="project-tag-icon">▼</span>
+                  </span>
+                  <span class="project-tag" onclick="toggleDescription(this, 'buy-02')">
+                    buy-02
+                    <span class="project-tag-icon">▼</span>
+                  </span>
+                  <span class="project-tag" onclick="toggleDescription(this, 'travel-plan')">
+                    travel-plan
+                    <span class="project-tag-icon">▼</span>
+                  </span>
+                  <span class="project-tag" onclick="toggleDescription(this, 'lets-travel')">
+                    lets-travel
+                    <span class="project-tag-icon">▼</span>
+                  </span>
+                </div>
+                <div class="project-description" data-project="buy-01">
+                  <div class="project-description-title">buy-01</div>
+                  <div class="project-description-text">
+                    Plateforme e-commerce avec architecture microservices utilisant Spring Boot, Angular et MongoDB.
+                  </div>
+                </div>
+                <div class="project-description" data-project="buy-02">
+                  <div class="project-description-title">buy-02</div>
+                  <div class="project-description-text">
+                    Finalisation avec environnement professionnel CI/CD complet.
+                  </div>
+                </div>
+                <div class="project-description" data-project="travel-plan">
+                  <div class="project-description-title">travel-plan</div>
+                  <div class="project-description-text">
+                    Architecture complexe avec microservices, PostgreSQL, Neo4j et intégration CI/CD.
+                  </div>
+                </div>
+                <div class="project-description" data-project="lets-travel">
+                  <div class="project-description-title">lets-travel</div>
+                  <div class="project-description-text">
+                    Architecture avec MongoDB, Elasticsearch, microservices et Docker.
+                  </div>
+                </div>
               </div>
             </div>
+
             <div class="competency-item">
               <div class="competency-badge badge-milestone"></div>
               <div class="competency-text">
@@ -470,6 +840,18 @@
                 </div>
                 <div class="competency-source">
                   Milestone Project - Négociation commerciale
+                </div>
+                <div class="project-tags">
+                  <span class="project-tag milestone-tag" onclick="toggleDescription(this, 'milestone')">
+                    Milestone Project
+                    <span class="project-tag-icon">▼</span>
+                  </span>
+                </div>
+                <div class="project-description milestone-desc">
+                  <div class="project-description-title">Milestone Project</div>
+                  <div class="project-description-text">
+                    Projet capstone développant les compétences en négociation commerciale et proposition de solutions.
+                  </div>
                 </div>
               </div>
             </div>
@@ -490,8 +872,51 @@
                 <div class="competency-source">
                   Projets: mr-jenk, buy-02, travel-plan, lets-travel
                 </div>
+                <div class="project-tags">
+                  <span class="project-tag" onclick="toggleDescription(this, 'mr-jenk')">
+                    mr-jenk
+                    <span class="project-tag-icon">▼</span>
+                  </span>
+                  <span class="project-tag" onclick="toggleDescription(this, 'buy-02')">
+                    buy-02
+                    <span class="project-tag-icon">▼</span>
+                  </span>
+                  <span class="project-tag" onclick="toggleDescription(this, 'travel-plan')">
+                    travel-plan
+                    <span class="project-tag-icon">▼</span>
+                  </span>
+                  <span class="project-tag" onclick="toggleDescription(this, 'lets-travel')">
+                    lets-travel
+                    <span class="project-tag-icon">▼</span>
+                  </span>
+                </div>
+                <div class="project-description" data-project="mr-jenk">
+                  <div class="project-description-title">mr-jenk</div>
+                  <div class="project-description-text">
+                    Mise en place d'un pipeline CI/CD avec Jenkins pour automatiser les tests et le déploiement. Introduction aux concepts de l'intégration continue et du déploiement continu, essentiels pour un développement efficace.
+                  </div>
+                </div>
+                <div class="project-description" data-project="buy-02">
+                  <div class="project-description-title">buy-02</div>
+                  <div class="project-description-text">
+                    Finalisation du projet buy-01 avec environnement de développement professionnel incluant Jenkins, SonarQube et Docker.
+                  </div>
+                </div>
+                <div class="project-description" data-project="travel-plan">
+                  <div class="project-description-title">travel-plan</div>
+                  <div class="project-description-text">
+                    Panneau d'administration avec environnement CI/CD complet et technologies modernes.
+                  </div>
+                </div>
+                <div class="project-description" data-project="lets-travel">
+                  <div class="project-description-title">lets-travel</div>
+                  <div class="project-description-text">
+                    Interface client avec architecture microservices et déploiement automatisé.
+                  </div>
+                </div>
               </div>
             </div>
+
             <div class="competency-item">
               <div class="competency-badge badge-projects"></div>
               <div class="competency-text">
@@ -499,8 +924,31 @@
                   Configurer système intégration continue
                 </div>
                 <div class="competency-source">Projets: mr-jenk, safe-zone</div>
+                <div class="project-tags">
+                  <span class="project-tag" onclick="toggleDescription(this, 'mr-jenk')">
+                    mr-jenk
+                    <span class="project-tag-icon">▼</span>
+                  </span>
+                  <span class="project-tag" onclick="toggleDescription(this, 'safe-zone')">
+                    safe-zone
+                    <span class="project-tag-icon">▼</span>
+                  </span>
+                </div>
+                <div class="project-description" data-project="mr-jenk">
+                  <div class="project-description-title">mr-jenk</div>
+                  <div class="project-description-text">
+                    Configuration complète d'un pipeline CI/CD avec Jenkins pour automatiser le workflow de développement.
+                  </div>
+                </div>
+                <div class="project-description" data-project="safe-zone">
+                  <div class="project-description-title">safe-zone</div>
+                  <div class="project-description-text">
+                    Intégration de SonarQube dans le pipeline CI pour l'analyse automatique de la qualité et sécurité du code.
+                  </div>
+                </div>
               </div>
             </div>
+
             <div class="competency-item">
               <div class="competency-badge badge-projects"></div>
               <div class="competency-text">
@@ -510,8 +958,31 @@
                 <div class="competency-source">
                   Projets: lets-play, angul-it
                 </div>
+                <div class="project-tags">
+                  <span class="project-tag" onclick="toggleDescription(this, 'lets-play')">
+                    lets-play
+                    <span class="project-tag-icon">▼</span>
+                  </span>
+                  <span class="project-tag" onclick="toggleDescription(this, 'angul-it')">
+                    angul-it
+                    <span class="project-tag-icon">▼</span>
+                  </span>
+                </div>
+                <div class="project-description" data-project="lets-play">
+                  <div class="project-description-title">lets-play</div>
+                  <div class="project-description-text">
+                    Développement d'une API CRUD RESTful avec Spring Boot et MongoDB. Introduction aux principes REST et aux opérations de base de données.
+                  </div>
+                </div>
+                <div class="project-description" data-project="angul-it">
+                  <div class="project-description-title">angul-it</div>
+                  <div class="project-description-text">
+                    Création d'une application captcha multi-étapes avec Angular et un gestionnaire d'état. Introduction au développement front-end moderne et à la gestion de données entre composants.
+                  </div>
+                </div>
               </div>
             </div>
+
             <div class="competency-item">
               <div class="competency-badge badge-projects"></div>
               <div class="competency-text">
@@ -521,8 +992,51 @@
                 <div class="competency-source">
                   Projets: mr-jenk, buy-02, travel-plan, lets-travel
                 </div>
+                <div class="project-tags">
+                  <span class="project-tag" onclick="toggleDescription(this, 'mr-jenk')">
+                    mr-jenk
+                    <span class="project-tag-icon">▼</span>
+                  </span>
+                  <span class="project-tag" onclick="toggleDescription(this, 'buy-02')">
+                    buy-02
+                    <span class="project-tag-icon">▼</span>
+                  </span>
+                  <span class="project-tag" onclick="toggleDescription(this, 'travel-plan')">
+                    travel-plan
+                    <span class="project-tag-icon">▼</span>
+                  </span>
+                  <span class="project-tag" onclick="toggleDescription(this, 'lets-travel')">
+                    lets-travel
+                    <span class="project-tag-icon">▼</span>
+                  </span>
+                </div>
+                <div class="project-description" data-project="mr-jenk">
+                  <div class="project-description-title">mr-jenk</div>
+                  <div class="project-description-text">
+                    Intégration de tests automatisés dans le pipeline CI/CD Jenkins.
+                  </div>
+                </div>
+                <div class="project-description" data-project="buy-02">
+                  <div class="project-description-title">buy-02</div>
+                  <div class="project-description-text">
+                    Tests unitaires et d'intégration dans un environnement professionnel.
+                  </div>
+                </div>
+                <div class="project-description" data-project="travel-plan">
+                  <div class="project-description-title">travel-plan</div>
+                  <div class="project-description-text">
+                    Suite de tests complète pour application de réservation de voyages.
+                  </div>
+                </div>
+                <div class="project-description" data-project="lets-travel">
+                  <div class="project-description-title">lets-travel</div>
+                  <div class="project-description-text">
+                    Tests front-end et back-end pour interface client.
+                  </div>
+                </div>
               </div>
             </div>
+
             <div class="competency-item">
               <div class="competency-badge badge-projects"></div>
               <div class="competency-text">
@@ -530,8 +1044,61 @@
                 <div class="competency-source">
                   Projets: lets-play, buy-01, buy-02, travel-plan, lets-travel
                 </div>
+                <div class="project-tags">
+                  <span class="project-tag" onclick="toggleDescription(this, 'lets-play')">
+                    lets-play
+                    <span class="project-tag-icon">▼</span>
+                  </span>
+                  <span class="project-tag" onclick="toggleDescription(this, 'buy-01')">
+                    buy-01
+                    <span class="project-tag-icon">▼</span>
+                  </span>
+                  <span class="project-tag" onclick="toggleDescription(this, 'buy-02')">
+                    buy-02
+                    <span class="project-tag-icon">▼</span>
+                  </span>
+                  <span class="project-tag" onclick="toggleDescription(this, 'travel-plan')">
+                    travel-plan
+                    <span class="project-tag-icon">▼</span>
+                  </span>
+                  <span class="project-tag" onclick="toggleDescription(this, 'lets-travel')">
+                    lets-travel
+                    <span class="project-tag-icon">▼</span>
+                  </span>
+                </div>
+                <div class="project-description" data-project="lets-play">
+                  <div class="project-description-title">lets-play</div>
+                  <div class="project-description-text">
+                    API CRUD RESTful avec Spring Boot et MongoDB.
+                  </div>
+                </div>
+                <div class="project-description" data-project="buy-01">
+                  <div class="project-description-title">buy-01</div>
+                  <div class="project-description-text">
+                    Application e-commerce full-stack avec microservices.
+                  </div>
+                </div>
+                <div class="project-description" data-project="buy-02">
+                  <div class="project-description-title">buy-02</div>
+                  <div class="project-description-text">
+                    Finalisation e-commerce avec environnement professionnel.
+                  </div>
+                </div>
+                <div class="project-description" data-project="travel-plan">
+                  <div class="project-description-title">travel-plan</div>
+                  <div class="project-description-text">
+                    Back-office de réservation de voyages avec technologies avancées.
+                  </div>
+                </div>
+                <div class="project-description" data-project="lets-travel">
+                  <div class="project-description-title">lets-travel</div>
+                  <div class="project-description-text">
+                    Interface client pour personnalisation de voyages.
+                  </div>
+                </div>
               </div>
             </div>
+
             <div class="competency-item">
               <div class="competency-badge badge-projects"></div>
               <div class="competency-text">
@@ -541,8 +1108,51 @@
                 <div class="competency-source">
                   Projets: mr-jenk, buy-02, travel-plan, lets-travel
                 </div>
+                <div class="project-tags">
+                  <span class="project-tag" onclick="toggleDescription(this, 'mr-jenk')">
+                    mr-jenk
+                    <span class="project-tag-icon">▼</span>
+                  </span>
+                  <span class="project-tag" onclick="toggleDescription(this, 'buy-02')">
+                    buy-02
+                    <span class="project-tag-icon">▼</span>
+                  </span>
+                  <span class="project-tag" onclick="toggleDescription(this, 'travel-plan')">
+                    travel-plan
+                    <span class="project-tag-icon">▼</span>
+                  </span>
+                  <span class="project-tag" onclick="toggleDescription(this, 'lets-travel')">
+                    lets-travel
+                    <span class="project-tag-icon">▼</span>
+                  </span>
+                </div>
+                <div class="project-description" data-project="mr-jenk">
+                  <div class="project-description-title">mr-jenk</div>
+                  <div class="project-description-text">
+                    Déploiement automatisé via pipeline Jenkins CI/CD.
+                  </div>
+                </div>
+                <div class="project-description" data-project="buy-02">
+                  <div class="project-description-title">buy-02</div>
+                  <div class="project-description-text">
+                    Déploiement progressif avec Docker et orchestration.
+                  </div>
+                </div>
+                <div class="project-description" data-project="travel-plan">
+                  <div class="project-description-title">travel-plan</div>
+                  <div class="project-description-text">
+                    Déploiement avec Ansible et Jenkins pour automatisation complète.
+                  </div>
+                </div>
+                <div class="project-description" data-project="lets-travel">
+                  <div class="project-description-title">lets-travel</div>
+                  <div class="project-description-text">
+                    Déploiement microservices avec Docker et orchestration avancée.
+                  </div>
+                </div>
               </div>
             </div>
+
             <div class="competency-item">
               <div class="competency-badge badge-projects"></div>
               <div class="competency-text">
@@ -550,8 +1160,41 @@
                 <div class="competency-source">
                   Projets: buy-02, travel-plan, lets-travel
                 </div>
+                <div class="project-tags">
+                  <span class="project-tag" onclick="toggleDescription(this, 'buy-02')">
+                    buy-02
+                    <span class="project-tag-icon">▼</span>
+                  </span>
+                  <span class="project-tag" onclick="toggleDescription(this, 'travel-plan')">
+                    travel-plan
+                    <span class="project-tag-icon">▼</span>
+                  </span>
+                  <span class="project-tag" onclick="toggleDescription(this, 'lets-travel')">
+                    lets-travel
+                    <span class="project-tag-icon">▼</span>
+                  </span>
+                </div>
+                <div class="project-description" data-project="buy-02">
+                  <div class="project-description-title">buy-02</div>
+                  <div class="project-description-text">
+                    Documentation de tests pour application e-commerce complète.
+                  </div>
+                </div>
+                <div class="project-description" data-project="travel-plan">
+                  <div class="project-description-title">travel-plan</div>
+                  <div class="project-description-text">
+                    Cahier de recettes pour plateforme de réservation back-office.
+                  </div>
+                </div>
+                <div class="project-description" data-project="lets-travel">
+                  <div class="project-description-title">lets-travel</div>
+                  <div class="project-description-text">
+                    Tests d'acceptation pour interface utilisateur client.
+                  </div>
+                </div>
               </div>
             </div>
+
             <div class="competency-item">
               <div class="competency-badge badge-projects"></div>
               <div class="competency-text">
@@ -561,8 +1204,51 @@
                 <div class="competency-source">
                   Projets: buy-02, travel-plan, lets-travel, lets-play
                 </div>
+                <div class="project-tags">
+                  <span class="project-tag" onclick="toggleDescription(this, 'buy-02')">
+                    buy-02
+                    <span class="project-tag-icon">▼</span>
+                  </span>
+                  <span class="project-tag" onclick="toggleDescription(this, 'travel-plan')">
+                    travel-plan
+                    <span class="project-tag-icon">▼</span>
+                  </span>
+                  <span class="project-tag" onclick="toggleDescription(this, 'lets-travel')">
+                    lets-travel
+                    <span class="project-tag-icon">▼</span>
+                  </span>
+                  <span class="project-tag" onclick="toggleDescription(this, 'lets-play')">
+                    lets-play
+                    <span class="project-tag-icon">▼</span>
+                  </span>
+                </div>
+                <div class="project-description" data-project="buy-02">
+                  <div class="project-description-title">buy-02</div>
+                  <div class="project-description-text">
+                    Gestion de correctifs avec SonarQube et pipeline CI/CD.
+                  </div>
+                </div>
+                <div class="project-description" data-project="travel-plan">
+                  <div class="project-description-title">travel-plan</div>
+                  <div class="project-description-text">
+                    Stratégie de correction pour application complexe multi-base.
+                  </div>
+                </div>
+                <div class="project-description" data-project="lets-travel">
+                  <div class="project-description-title">lets-travel</div>
+                  <div class="project-description-text">
+                    Plan de maintenance pour interface utilisateur.
+                  </div>
+                </div>
+                <div class="project-description" data-project="lets-play">
+                  <div class="project-description-title">lets-play</div>
+                  <div class="project-description-text">
+                    Correction et maintenance d'API RESTful.
+                  </div>
+                </div>
               </div>
             </div>
+
             <div class="competency-item">
               <div class="competency-badge badge-projects"></div>
               <div class="competency-text">
@@ -571,6 +1257,18 @@
                 </div>
                 <div class="competency-source">
                   Projets: Tous les projets techniques
+                </div>
+                <div class="project-tags">
+                  <span class="project-tag" onclick="toggleDescription(this, 'all-projects')">
+                    Tous les projets
+                    <span class="project-tag-icon">▼</span>
+                  </span>
+                </div>
+                <div class="project-description" data-project="all-projects">
+                  <div class="project-description-title">Tous les projets techniques</div>
+                  <div class="project-description-text">
+                    Documentation technique obligatoire pour chaque projet incluant: lets-play, angul-it, buy-01, mr-jenk, safe-zone, buy-02, travel-plan et lets-travel. Chaque projet nécessite documentation d'architecture, API, déploiement et maintenance.
+                  </div>
                 </div>
               </div>
             </div>
@@ -591,8 +1289,31 @@
                 <div class="competency-source">
                   Projets: travel-plan, lets-travel
                 </div>
+                <div class="project-tags">
+                  <span class="project-tag" onclick="toggleDescription(this, 'travel-plan')">
+                    travel-plan
+                    <span class="project-tag-icon">▼</span>
+                  </span>
+                  <span class="project-tag" onclick="toggleDescription(this, 'lets-travel')">
+                    lets-travel
+                    <span class="project-tag-icon">▼</span>
+                  </span>
+                </div>
+                <div class="project-description" data-project="travel-plan">
+                  <div class="project-description-title">travel-plan</div>
+                  <div class="project-description-text">
+                    Projet de 25 jours nécessitant planification rigoureuse pour développer un back-office complet avec équipe de 4-6 personnes.
+                  </div>
+                </div>
+                <div class="project-description" data-project="lets-travel">
+                  <div class="project-description-title">lets-travel</div>
+                  <div class="project-description-text">
+                    Projet de 35 jours en collaboration, continuation de travel-plan avec gestion d'équipe essentielle.
+                  </div>
+                </div>
               </div>
             </div>
+
             <div class="competency-item">
               <div class="competency-badge badge-projects"></div>
               <div class="competency-text">
@@ -602,8 +1323,31 @@
                 <div class="competency-source">
                   Projets: travel-plan, lets-travel
                 </div>
+                <div class="project-tags">
+                  <span class="project-tag" onclick="toggleDescription(this, 'travel-plan')">
+                    travel-plan
+                    <span class="project-tag-icon">▼</span>
+                  </span>
+                  <span class="project-tag" onclick="toggleDescription(this, 'lets-travel')">
+                    lets-travel
+                    <span class="project-tag-icon">▼</span>
+                  </span>
+                </div>
+                <div class="project-description" data-project="travel-plan">
+                  <div class="project-description-title">travel-plan</div>
+                  <div class="project-description-text">
+                    Suivi d'avancement pour projet complexe avec multiples technologies et équipe distribuée.
+                  </div>
+                </div>
+                <div class="project-description" data-project="lets-travel">
+                  <div class="project-description-title">lets-travel</div>
+                  <div class="project-description-text">
+                    Pilotage continu sur 35 jours pour interface client complexe.
+                  </div>
+                </div>
               </div>
             </div>
+
             <div class="competency-item">
               <div class="competency-badge badge-milestone"></div>
               <div class="competency-text">
@@ -613,8 +1357,21 @@
                 <div class="competency-source">
                   Milestone Project - Décisions stratégiques
                 </div>
+                <div class="project-tags">
+                  <span class="project-tag milestone-tag" onclick="toggleDescription(this, 'milestone')">
+                    Milestone Project
+                    <span class="project-tag-icon">▼</span>
+                  </span>
+                </div>
+                <div class="project-description milestone-desc">
+                  <div class="project-description-title">Milestone Project</div>
+                  <div class="project-description-text">
+                    Développement de compétences en prise de décisions stratégiques et arbitrages projet.
+                  </div>
+                </div>
               </div>
             </div>
+
             <div class="competency-item">
               <div class="competency-badge badge-milestone"></div>
               <div class="competency-text">
@@ -624,8 +1381,21 @@
                 <div class="competency-source">
                   Milestone Project - Management d'équipe
                 </div>
+                <div class="project-tags">
+                  <span class="project-tag milestone-tag" onclick="toggleDescription(this, 'milestone')">
+                    Milestone Project
+                    <span class="project-tag-icon">▼</span>
+                  </span>
+                </div>
+                <div class="project-description milestone-desc">
+                  <div class="project-description-title">Milestone Project</div>
+                  <div class="project-description-text">
+                    Compétences en leadership et management d'équipe technique.
+                  </div>
+                </div>
               </div>
             </div>
+
             <div class="competency-item">
               <div class="competency-badge badge-milestone"></div>
               <div class="competency-text">
@@ -635,8 +1405,21 @@
                 <div class="competency-source">
                   Milestone Project - Gestion RH
                 </div>
+                <div class="project-tags">
+                  <span class="project-tag milestone-tag" onclick="toggleDescription(this, 'milestone')">
+                    Milestone Project
+                    <span class="project-tag-icon">▼</span>
+                  </span>
+                </div>
+                <div class="project-description milestone-desc">
+                  <div class="project-description-title">Milestone Project</div>
+                  <div class="project-description-text">
+                    Évaluation des compétences nécessaires et gestion des ressources humaines.
+                  </div>
+                </div>
               </div>
             </div>
+
             <div class="competency-item">
               <div class="competency-badge badge-lifeskills"></div>
               <div class="competency-text">
@@ -646,8 +1429,21 @@
                 <div class="competency-source">
                   Lifeskills + Internship - Communication
                 </div>
+                <div class="project-tags">
+                  <span class="project-tag lifeskills-tag" onclick="toggleDescription(this, 'lifeskills')">
+                    Lifeskills + Internship
+                    <span class="project-tag-icon">▼</span>
+                  </span>
+                </div>
+                <div class="project-description lifeskills-desc">
+                  <div class="project-description-title">Lifeskills + Internship</div>
+                  <div class="project-description-text">
+                    Développement de compétences en communication professionnelle, reporting client, et présentation de résultats développées durant les formations lifeskills et l'expérience en entreprise.
+                  </div>
+                </div>
               </div>
             </div>
+
             <div class="competency-item">
               <div class="competency-badge badge-lifeskills"></div>
               <div class="competency-text">
@@ -656,6 +1452,18 @@
                 </div>
                 <div class="competency-source">
                   Lifeskills + Internship - Présentations
+                </div>
+                <div class="project-tags">
+                  <span class="project-tag lifeskills-tag" onclick="toggleDescription(this, 'lifeskills')">
+                    Lifeskills + Internship
+                    <span class="project-tag-icon">▼</span>
+                  </span>
+                </div>
+                <div class="project-description lifeskills-desc">
+                  <div class="project-description-title">Lifeskills + Internship</div>
+                  <div class="project-description-text">
+                    Compétences en présentation technique et démonstration de fonctionnalités acquises via formations lifeskills et pratique en stage.
+                  </div>
                 </div>
               </div>
             </div>
@@ -677,8 +1485,21 @@
                 <div class="competency-source">
                   Milestone Project - Gestion packages
                 </div>
+                <div class="project-tags">
+                  <span class="project-tag milestone-tag" onclick="toggleDescription(this, 'milestone')">
+                    Milestone Project
+                    <span class="project-tag-icon">▼</span>
+                  </span>
+                </div>
+                <div class="project-description milestone-desc">
+                  <div class="project-description-title">Milestone Project</div>
+                  <div class="project-description-text">
+                    Gestion des dépendances et mise à jour des bibliothèques logicielles.
+                  </div>
+                </div>
               </div>
             </div>
+
             <div class="competency-item">
               <div class="competency-badge badge-projects"></div>
               <div class="competency-text">
@@ -688,8 +1509,41 @@
                 <div class="competency-source">
                   Projets: buy-02, travel-plan, lets-travel
                 </div>
+                <div class="project-tags">
+                  <span class="project-tag" onclick="toggleDescription(this, 'buy-02')">
+                    buy-02
+                    <span class="project-tag-icon">▼</span>
+                  </span>
+                  <span class="project-tag" onclick="toggleDescription(this, 'travel-plan')">
+                    travel-plan
+                    <span class="project-tag-icon">▼</span>
+                  </span>
+                  <span class="project-tag" onclick="toggleDescription(this, 'lets-travel')">
+                    lets-travel
+                    <span class="project-tag-icon">▼</span>
+                  </span>
+                </div>
+                <div class="project-description" data-project="buy-02">
+                  <div class="project-description-title">buy-02</div>
+                  <div class="project-description-text">
+                    Mise en place de monitoring et alertes avec environnement CI/CD complet.
+                  </div>
+                </div>
+                <div class="project-description" data-project="travel-plan">
+                  <div class="project-description-title">travel-plan</div>
+                  <div class="project-description-text">
+                    Système de supervision pour application distribuée multi-base de données.
+                  </div>
+                </div>
+                <div class="project-description" data-project="lets-travel">
+                  <div class="project-description-title">lets-travel</div>
+                  <div class="project-description-text">
+                    Monitoring de microservices et alertes en temps réel.
+                  </div>
+                </div>
               </div>
             </div>
+
             <div class="competency-item">
               <div class="competency-badge badge-projects"></div>
               <div class="competency-text">
@@ -699,8 +1553,51 @@
                 <div class="competency-source">
                   Projets: safe-zone, buy-02, travel-plan, lets-travel
                 </div>
+                <div class="project-tags">
+                  <span class="project-tag" onclick="toggleDescription(this, 'safe-zone')">
+                    safe-zone
+                    <span class="project-tag-icon">▼</span>
+                  </span>
+                  <span class="project-tag" onclick="toggleDescription(this, 'buy-02')">
+                    buy-02
+                    <span class="project-tag-icon">▼</span>
+                  </span>
+                  <span class="project-tag" onclick="toggleDescription(this, 'travel-plan')">
+                    travel-plan
+                    <span class="project-tag-icon">▼</span>
+                  </span>
+                  <span class="project-tag" onclick="toggleDescription(this, 'lets-travel')">
+                    lets-travel
+                    <span class="project-tag-icon">▼</span>
+                  </span>
+                </div>
+                <div class="project-description" data-project="safe-zone">
+                  <div class="project-description-title">safe-zone</div>
+                  <div class="project-description-text">
+                    Détection et journalisation d'anomalies via SonarQube.
+                  </div>
+                </div>
+                <div class="project-description" data-project="buy-02">
+                  <div class="project-description-title">buy-02</div>
+                  <div class="project-description-text">
+                    Logging et traçabilité des erreurs dans environnement production.
+                  </div>
+                </div>
+                <div class="project-description" data-project="travel-plan">
+                  <div class="project-description-title">travel-plan</div>
+                  <div class="project-description-text">
+                    Gestion des logs pour système distribué complexe.
+                  </div>
+                </div>
+                <div class="project-description" data-project="lets-travel">
+                  <div class="project-description-title">lets-travel</div>
+                  <div class="project-description-text">
+                    Centralisation et analyse des anomalies microservices.
+                  </div>
+                </div>
               </div>
             </div>
+
             <div class="competency-item">
               <div class="competency-badge badge-projects"></div>
               <div class="competency-text">
@@ -708,8 +1605,61 @@
                 <div class="competency-source">
                   Projets: mr-jenk, safe-zone, buy-02, travel-plan, lets-travel
                 </div>
+                <div class="project-tags">
+                  <span class="project-tag" onclick="toggleDescription(this, 'mr-jenk')">
+                    mr-jenk
+                    <span class="project-tag-icon">▼</span>
+                  </span>
+                  <span class="project-tag" onclick="toggleDescription(this, 'safe-zone')">
+                    safe-zone
+                    <span class="project-tag-icon">▼</span>
+                  </span>
+                  <span class="project-tag" onclick="toggleDescription(this, 'buy-02')">
+                    buy-02
+                    <span class="project-tag-icon">▼</span>
+                  </span>
+                  <span class="project-tag" onclick="toggleDescription(this, 'travel-plan')">
+                    travel-plan
+                    <span class="project-tag-icon">▼</span>
+                  </span>
+                  <span class="project-tag" onclick="toggleDescription(this, 'lets-travel')">
+                    lets-travel
+                    <span class="project-tag-icon">▼</span>
+                  </span>
+                </div>
+                <div class="project-description" data-project="mr-jenk">
+                  <div class="project-description-title">mr-jenk</div>
+                  <div class="project-description-text">
+                    Déploiement automatisé de correctifs via CI/CD.
+                  </div>
+                </div>
+                <div class="project-description" data-project="safe-zone">
+                  <div class="project-description-title">safe-zone</div>
+                  <div class="project-description-text">
+                    Corrections basées sur analyses SonarQube.
+                  </div>
+                </div>
+                <div class="project-description" data-project="buy-02">
+                  <div class="project-description-title">buy-02</div>
+                  <div class="project-description-text">
+                    Gestion complète des correctifs en production.
+                  </div>
+                </div>
+                <div class="project-description" data-project="travel-plan">
+                  <div class="project-description-title">travel-plan</div>
+                  <div class="project-description-text">
+                    Hotfixes pour application distribuée critique.
+                  </div>
+                </div>
+                <div class="project-description" data-project="lets-travel">
+                  <div class="project-description-title">lets-travel</div>
+                  <div class="project-description-text">
+                    Correctifs microservices avec zéro downtime.
+                  </div>
+                </div>
               </div>
             </div>
+
             <div class="competency-item">
               <div class="competency-badge badge-lifeskills"></div>
               <div class="competency-text">
@@ -717,8 +1667,21 @@
                 <div class="competency-source">
                   Lifeskills + Internship - Amélioration continue
                 </div>
+                <div class="project-tags">
+                  <span class="project-tag lifeskills-tag" onclick="toggleDescription(this, 'lifeskills')">
+                    Lifeskills + Internship
+                    <span class="project-tag-icon">▼</span>
+                  </span>
+                </div>
+                <div class="project-description lifeskills-desc">
+                  <div class="project-description-title">Lifeskills + Internship</div>
+                  <div class="project-description-text">
+                    Développement de l'esprit critique et proposition d'améliorations continues via formations et expérience professionnelle.
+                  </div>
+                </div>
               </div>
             </div>
+
             <div class="competency-item">
               <div class="competency-badge badge-milestone"></div>
               <div class="competency-text">
@@ -728,8 +1691,21 @@
                 <div class="competency-source">
                   Milestone Project - Documentation versions
                 </div>
+                <div class="project-tags">
+                  <span class="project-tag milestone-tag" onclick="toggleDescription(this, 'milestone')">
+                    Milestone Project
+                    <span class="project-tag-icon">▼</span>
+                  </span>
+                </div>
+                <div class="project-description milestone-desc">
+                  <div class="project-description-title">Milestone Project</div>
+                  <div class="project-description-text">
+                    Gestion de versions et documentation des déploiements.
+                  </div>
+                </div>
               </div>
             </div>
+
             <div class="competency-item">
               <div class="competency-badge badge-lifeskills"></div>
               <div class="competency-text">
@@ -739,11 +1715,62 @@
                 <div class="competency-source">
                   Lifeskills + Internship - Collaboration
                 </div>
+                <div class="project-tags">
+                  <span class="project-tag lifeskills-tag" onclick="toggleDescription(this, 'lifeskills')">
+                    Lifeskills + Internship
+                    <span class="project-tag-icon">▼</span>
+                  </span>
+                </div>
+                <div class="project-description lifeskills-desc">
+                  <div class="project-description-title">Lifeskills + Internship</div>
+                  <div class="project-description-text">
+                    Compétences en travail d'équipe et collaboration inter-services développées en formation et stage.
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
+
+    <script>
+      function toggleDescription(element, projectKey) {
+        const competencyText = element.closest('.competency-text');
+        const allDescriptions = competencyText.querySelectorAll('.project-description');
+        
+        // Find the specific description for this project
+        let targetDescription;
+        if (projectKey === 'milestone' || projectKey === 'lifeskills') {
+          targetDescription = competencyText.querySelector(`.project-description.${projectKey}-desc`);
+        } else {
+          targetDescription = competencyText.querySelector(`.project-description[data-project="${projectKey}"]`);
+        }
+        
+        if (!targetDescription) return;
+        
+        // Toggle the clicked description
+        const isCurrentlyActive = targetDescription.classList.contains('active');
+        
+        // Close all descriptions in this competency
+        allDescriptions.forEach(desc => {
+          desc.classList.remove('active');
+        });
+        
+        // Reset all tag icons in this competency
+        const allTags = competencyText.querySelectorAll('.project-tag');
+        allTags.forEach(tag => {
+          const icon = tag.querySelector('.project-tag-icon');
+          if (icon) icon.textContent = '▼';
+        });
+        
+        // If it wasn't active, open it
+        if (!isCurrentlyActive) {
+          targetDescription.classList.add('active');
+          const icon = element.querySelector('.project-tag-icon');
+          if (icon) icon.textContent = '▲';
+        }
+      }
+    </script>
   </body>
 </html>
